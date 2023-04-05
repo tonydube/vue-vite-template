@@ -1,28 +1,15 @@
 <template>
   <q-layout>
-    <q-page-container>
-      <q-page class="background-image q-pt-xl q-px-xl column" style="border-bottom: 1px solid red">
-        <q-toolbar class="q-px-none">
-          <q-img
-            :src="'https://macsnh.org/wp-content/uploads/2019/08/demo-logo-black.png'"
-            style="height: 50px; max-width: 125px"
-          />
-          <q-space />
-          <q-tabs v-model="tab" narrow-indicator>
-            <q-tab class="q-px-xl" name="tab1" label="Contact" no-caps />
-            <q-tab class="q-px-xl" name="tab2" label="About" no-caps />
-            <q-tab class="q-px-xl" name="tab3" label="Addresses" no-caps />
-            <q-tab class="q-px-xl" name="tab4" label="Services" no-caps />
-          </q-tabs>
-          <q-btn class="q-ml-lg q-px-lg" size="lg" color="primary" label="Request a call" />
-        </q-toolbar>
+    <q-page-container class="page-container">
+      <q-page class="background-image q-pt-md q-px-xl column" style="border-bottom: 1px solid red">
+        <Toolbar />
 
-        <div class="fill-height column justify-center" style="width: 45%">
-          <div class="text-h1 text-weight-medium q-pb-lg">We care about your smile</div>
-          <div class="text-h5 text-weight-regular text-grey-7 q-pb-lg">With more than 500,000 happy patients we can guarantee your smile.</div>
+        <div class="fill-height column justify-center" style="width: 55%">
+          <div class="text-h1 text-weight-medium q-pb-lg">Your solution for agile issue management</div>
+          <div class="text-h5 text-weight-regular text-grey-7 q-pb-lg">Experience the power of robust ticket tracking</div>
           <div class="">
-            <q-btn class="q-px-lg" color="primary" size="lg" label="Book an appointment" no-caps />
-            <q-btn class="q-ml-lg q-px-lg" size="lg" color="black" label="Meet our doctors" icon="fa-solid fa-circle-play" no-caps flat />
+            <q-btn class="q-px-lg" color="primary" size="lg" label="Learn more" no-caps />
+            <q-btn class="q-ml-lg q-px-lg" size="lg" color="black" label="Get a quick tour" icon="fa-solid fa-circle-play" no-caps flat />
           </div>
         </div>
         <div class="column" style="width: 45%">
@@ -32,29 +19,29 @@
                 <span class="text-h6 text-weight-bold">+500k</span>
               </div>
               <div class="row">
-                <span class="text-body1 text-grey-7">happy patients</span>
+                <span class="text-body1 text-grey-7">issues tracked</span>
               </div>
             </div>
             <div class="col">
               <div class="row">
-                <span class="text-h6 text-weight-bold">+20</span>
+                <span class="text-h6 text-weight-bold">+20k</span>
               </div>
               <div class="row">
-                <span class="text-body1 text-grey-7">branches all over US</span>
+                <span class="text-body1 text-grey-7">projects monitored</span>
               </div>
             </div>
             <div class="col">
               <div class="row">
-                <span class="text-h6 text-weight-bold">+1000</span>
+                <span class="text-h6 text-weight-bold">+5k</span>
               </div>
               <div class="row">
-                <span class="text-body1 text-grey-7">amazing dentists</span>
+                <span class="text-body1 text-grey-7">users strong</span>
               </div>
             </div>
           </div>
         </div>
       </q-page>
-      <q-page class="q-pt-xl q-px-xl column" style="border-bottom: 1px solid red">
+      <!-- <q-page class="q-pt-xl q-px-xl column" style="border-bottom: 1px solid red">
         <div class="row text-center">
           <div class="col-12 q-pb-lg">
             <span class="text-h6 text-primary text-center">Treatments</span>
@@ -214,13 +201,14 @@
             </div>
           </div>
         </div>
-      </q-page>
+      </q-page> -->
     </q-page-container>
   </q-layout>
 </template>
 
 <script>
 import { ref } from 'vue'
+import Toolbar from '../components/Toolbar.vue'
 
 export default {
   setup () {
@@ -230,7 +218,9 @@ export default {
   },
   name: "Home",
   props: [],
-  components: {},
+  components: {
+    Toolbar
+  },
   data() {
     return {
       url: 'https://via.assets.so/img.jpg?w=100&h=100',
@@ -244,7 +234,18 @@ export default {
     }
   },
   created() {},
-  mounted() {},
+  mounted() {
+    // Set the width of the page container to 1280 on large screens
+    this.$nextTick(() => {
+      const media = this.$q.screen.gt.lg
+      const pageContainer = document.querySelector('.page-container')
+      if (media && pageContainer) {
+        pageContainer.style.maxWidth = '1440px'
+        pageContainer.style.marginLeft = 'auto'
+        pageContainer.style.marginRight = 'auto'
+      }
+    })
+  },
 };
 </script>
 
@@ -256,7 +257,7 @@ export default {
   flex: 1;
 }
 .background-image {
-  /* background-image: url('src/assets/man-smiling.jpg'); */
+  background-image: url('src/assets/main.jpg');
   background-size: cover;
 }
 </style>
