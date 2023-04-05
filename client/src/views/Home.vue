@@ -256,7 +256,7 @@ export default {
   flex: 1;
 }
 .background-image {
-  background-image: url('src/assets/man-smiling.jpg');
+  /* background-image: url('src/assets/man-smiling.jpg'); */
   background-size: cover;
 }
 </style>

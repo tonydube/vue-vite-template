@@ -3,22 +3,43 @@ require('dotenv').config()
 const express = require("express");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const cors = require("cors");
+const db = require("./database.js")
 
 const app = express();
 
 app.use(express.json())
 
+app.use(cors());
+
+require('./routes')(app)
+
 const users = []
 
 let refreshTokens = []
 
+app.get('/get-all-tickets', async (req, res) => {
+  try {
+    const [results, fields] = await db.query('SELECT * FROM tickets');
+    res.json(results);
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+app.get('/get-all-projects', async (req, res) => {
+  try {
+    const [results, fields] = await db.query('SELECT * FROM projects');
+    res.json(results);
+  } catch (error) {
+    console.log(error);
+  }
+});
+
 app.post('/token', (req, res) => {
-  console.log(refreshTokens)
   const refreshToken = req.body.token
-  console.log('token', refreshToken)
   if (refreshToken == null) return res.sendStatus(401)
   if (refreshTokens.includes(refreshToken)) return res.sendStatus(403)
-  console.log('here')
   jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET, (err, user) => {
     if (err) return res.sendStatus(403)
     const accessToken = generateAccessToken({ username: user.username })
@@ -33,7 +54,6 @@ app.get('/users', authenticateToken, (req, res) => {
 app.post('/users', async (req, res) => {
   try {
     const hashedPassword = await bcrypt.hash(req.body.password, 10)
-    console.log(hashedPassword)
     const user = { name: req.body.name, password: hashedPassword }
     users.push(user)
     res.status(201).send()
@@ -78,7 +98,7 @@ app.post('/login', (req, res) => {
 function authenticateToken(req, res, next) {
   const authHeader = req.headers['authorization']
   const token = authHeader && authHeader.split(' ')[1]
-  if(token == null) return res.sendStatus(401)
+  if (token == null) return res.sendStatus(401)
 
   jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
     if (err) return res.sendStatus(403)
@@ -88,7 +108,7 @@ function authenticateToken(req, res, next) {
 }
 
 function generateAccessToken(user) {
-  return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '15s'})
+  return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '15s' })
 }
 
 app.listen(3000)
