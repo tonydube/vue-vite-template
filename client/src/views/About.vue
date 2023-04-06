@@ -359,7 +359,7 @@ export default {
         params['priority'] = this.priority;
         params['description'] = this.description;
         params['reporter'] = this.reporter;
-        params['assignee'] = this.reporter;
+        params['assignee'] = this.assignee;
         params['status'] = this.status;
 
         await TicketService.createTicket(params);
@@ -390,6 +390,7 @@ export default {
         this.currentIssue.priority = data.priority;
         this.currentIssue.description = data.description;
         this.currentIssue.reporter = data.reporter;
+        this.currentIssue.assignee = data.assignee;
         this.currentIssue.status = data.status;
 
         this.prompt = true;
@@ -406,6 +407,7 @@ export default {
         params['priority'] = this.currentIssue.priority;
         params['description'] = this.currentIssue.description;
         params['reporter'] = this.currentIssue.reporter;
+        params['assignee'] = this.currentIssue.assignee;
         params['status'] = this.currentIssue.status;
 
         const response = await TicketService.updateTicket(params);
@@ -435,6 +437,7 @@ export default {
       this.priority = null;
       this.description = null;
       this.reporter = null;
+      this.assignee = null;
       this.status = null;
     },
     async getProjects() {
