@@ -12,6 +12,9 @@ module.exports = (sequelize, DataTypes) => {
       reporter: {
         type: DataTypes.STRING,
       },
+      assignee: {
+        type: DataTypes.STRING,
+      },
       priority: {
         type: DataTypes.INTEGER,
       },
