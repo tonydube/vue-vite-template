@@ -117,13 +117,14 @@
               <q-card-section v-if="!loading">
                 <q-table :rows="data" :hide-header="mode === 'grid'" row-key="name" :columns="columns"
                   :grid="mode == 'grid'" :pagination.sync="pagination">
-                  <template v-slot:top-right="props">
+                  <template v-slot:top-left="props">
                     <q-input outlined dense debounce="300" v-model="filter" placeholder="Search">
                       <template v-slot:append>
-                        <q-icon name="fa-solid fa-magnifying-glass" />
+                        <q-icon name="fa-solid fa-magnifying-glass" size="12px"/>
                       </template>
                     </q-input>
-
+                  </template>
+                  <template v-slot:top-right="props">
                     <q-btn flat round dense :icon="props.inFullscreen ? 'fa-solid fa-compress' : 'fa-solid fa-expand'"
                       @click="props.toggleFullscreen" v-if="mode === 'list'">
                       <q-tooltip :disable="$q.platform.is.mobile" v-close-popup>{{
@@ -314,6 +315,7 @@ export default {
         "Subtask",
         "Feature",
         "Issue",
+        "Task",
         "Bug",
         "Error",
       ],
