@@ -126,7 +126,7 @@
                   </template>
                   <template v-slot:top-right="props">
                     <q-btn flat round dense :icon="props.inFullscreen ? 'fa-solid fa-compress' : 'fa-solid fa-expand'"
-                      @click="props.toggleFullscreen" v-if="mode === 'list'">
+                      @click="props.toggleFullscreen" v-if="mode === 'list'" class="q-mr-sm">
                       <q-tooltip :disable="$q.platform.is.mobile" v-close-popup>{{
                         props.inFullscreen
                         ? "Exit Fullscreen"
@@ -139,19 +139,23 @@
                       @click="
                         mode = mode === 'grid' ? 'list' : 'grid';
                       separator = mode === 'grid' ? 'none' : 'horizontal';
-                                                                      " v-if="!props.inFullscreen">
+                                                                      " v-if="!props.inFullscreen" class="q-mr-md">
                       <q-tooltip :disable="$q.platform.is.mobile" v-close-popup>{{ mode === "grid" ? "List" : "Grid" }}
                       </q-tooltip>
                     </q-btn>
 
-                    <q-btn color="primary" icon-right="fa-solid fa-box-archive" label="Export to csv" no-caps
-                      @click="exportDepositsTable" />
+                    <q-btn color="primary" label="Export to csv" no-caps @click="exportDepositsTable">
+                      <q-icon class="q-pl-sm" name="fa-solid fa-box-archive" size="14px"></q-icon>
+                    </q-btn>
                   </template>
                   <template v-slot:body-cell-actions="props">
                     <q-td :props="props">
-                      <q-btn dense round flat color="info" @click="editIssue(props)" icon="fa-solid fa-pencil"></q-btn>
-                      <q-btn dense round flat color="primary" @click="deleteIssue(props)"
-                        icon="fa-solid fa-trash"></q-btn>
+                      <q-btn dense round flat color="info" @click="editIssue(props)">
+                        <q-icon name="fa-solid fa-pencil" size="14px"></q-icon>
+                      </q-btn>
+                      <q-btn dense round flat color="primary" @click="deleteIssue(props)">
+                        <q-icon name="fa-solid fa-trash" size="14px"></q-icon>
+                      </q-btn>
                     </q-td>
                   </template>
                 </q-table>
