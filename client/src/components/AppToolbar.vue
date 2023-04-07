@@ -12,15 +12,18 @@
       </a>
     </div>
     <div v-if="$q.screen.gt.sm" class="toolbar-white-plain q-ml-xs q-gutter-lg row items-center no-wrap">
-      <q-btn-dropdown no-caps square color="rgba(0,0,0,0)" style="border-bottom: 1px solid" unelevated label="Fragility">
-        <q-list>
-          <q-item v-for="project in projects" clickable v-close-popup @click="onItemClick">
-            <q-item-section>
-              <q-item-label>{{ project }}</q-item-label>
-            </q-item-section>
-          </q-item>
-        </q-list>
-      </q-btn-dropdown>
+      <q-btn color="white" style="border-bottom: 1px solid white" label="Fragility" square flat no-caps>
+        <q-icon class="q-pl-xs q-pt-xs" name="fa-solid fa-angle-down" size="12px" />
+        <q-menu fit square>
+          <q-list>
+            <q-item v-for="project in projects" clickable v-close-popup @click="onItemClick">
+              <q-item-section>
+                <q-item-label>{{ project }}</q-item-label>
+              </q-item-section>
+            </q-item>
+          </q-list>
+        </q-menu>
+      </q-btn>
       <a href="javascript:void(0)" class="text-white">
         My Tickets
       </a>
@@ -36,7 +39,10 @@
     </div>
     <q-space />
     <q-select ref="search" dark dense standout use-input hide-selected class="toolbar-select" color="black"
-      :stack-label="false" label="Search for bugs.." v-model="search">
+      :stack-label="false" label="Search for bugs.." v-model="search" hide-dropdown-icon>
+      <template v-slot:append>
+        <q-icon name="fa-solid fa-angle-down" size="12px" />
+      </template>
       <template v-slot:no-option>
         <q-item>
           <q-item-section>
@@ -132,9 +138,41 @@ import { ref } from 'vue'
 export default {
   name: 'AppToolbar',
   setup() {
-    return {};
+    return {
+      search: ref(true),
+    };
   },
+  props: ["projects"],
   methods: {},
-  async mounted() { },
+  mounted() {
+  },
 }
 </script>
+<style lang="sass">
+.fire-brick
+  background-color: firebrick
+
+.toolbar
+  &-white-plain
+    a
+      color: white
+      text-decoration: none
+      &:hover
+        opacity: 0.7
+  &__menu-link:hover
+    background: #b22222
+    color: white
+  &__menu-link-signed-in,
+  &__menu-link-status
+    &:hover
+      & > div
+        background: white !important
+  &__menu-link-status
+    color: firebrick
+    &:hover
+      color: firebrick
+  &-select.q-field--focused
+    width: 500px !important
+    .q-field__append
+      display: none
+</style>

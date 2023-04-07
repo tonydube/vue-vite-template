@@ -1,7 +1,7 @@
 <template>
   <q-layout>
     <q-header elevated class="text-white fire-brick">
-      <AppToolbar />
+      <AppToolbar :projects="projects" />
     </q-header>
 
     <q-page-container>
@@ -22,14 +22,21 @@
                       <q-item-section>
                         <q-item-label class="q-pb-xs">Project *</q-item-label>
                         <q-select dense label="Project" outlined v-model="project" :options="projects" stack-label
-                          options-dense></q-select>
+                          options-dense hide-dropdown-icon>
+                          <template v-slot:append>
+                            <q-icon name="fa-solid fa-angle-down" size="12px" />
+                          </template>
+                        </q-select>
                       </q-item-section>
                     </q-item>
                     <q-item>
                       <q-item-section>
                         <q-item-label class="q-pb-xs">Issue Type *</q-item-label>
                         <q-select dense label="Issue Type" outlined v-model="issue" :options="issues" stack-label
-                          options-dense></q-select>
+                          options-dense hide-dropdown-icon>
+                          <template v-slot:append>
+                            <q-icon name="fa-solid fa-angle-down" size="12px" />
+                          </template></q-select>
                       </q-item-section>
                     </q-item>
                     <q-item>
@@ -64,21 +71,31 @@
                       <q-item-section>
                         <q-item-label class="q-pb-xs">Reporter</q-item-label>
                         <q-select dense outlined v-model="reporter" label="Reporter" value="Admin" :options="users"
-                          stack-label options-dense />
+                          stack-label options-dense hide-dropdown-icon>
+                          <template v-slot:append>
+                            <q-icon name="fa-solid fa-angle-down" size="12px" />
+                          </template>
+                        </q-select>
                       </q-item-section>
                     </q-item>
                     <q-item>
                       <q-item-section>
                         <q-item-label class="q-pb-xs">Assignee</q-item-label>
                         <q-select dense label="Assignee" outlined v-model="assignee" :options="users" stack-label
-                          options-dense></q-select>
+                          options-dense hide-dropdown-icon>
+                          <template v-slot:append>
+                            <q-icon name="fa-solid fa-angle-down" size="12px" />
+                          </template></q-select>
                       </q-item-section>
                     </q-item>
                     <q-item>
                       <q-item-section>
                         <q-item-label class="q-pb-xs">Status</q-item-label>
                         <q-select dense label="Status" outlined v-model="status" :options="statuses" stack-label
-                          options-dense></q-select>
+                          options-dense hide-dropdown-icon>
+                          <template v-slot:append>
+                            <q-icon name="fa-solid fa-angle-down" size="12px" />
+                          </template></q-select>
                       </q-item-section>
                     </q-item>
                   </q-list>
@@ -121,7 +138,7 @@
                       @click="
                         mode = mode === 'grid' ? 'list' : 'grid';
                       separator = mode === 'grid' ? 'none' : 'horizontal';
-                                              " v-if="!props.inFullscreen">
+                                                                      " v-if="!props.inFullscreen">
                       <q-tooltip :disable="$q.platform.is.mobile" v-close-popup>{{ mode === "grid" ? "List" : "Grid" }}
                       </q-tooltip>
                     </q-btn>
@@ -151,14 +168,20 @@
                           <q-item-section>
                             <q-item-label class="q-pb-xs">Project *</q-item-label>
                             <q-select dense label="Project" outlined v-model="currentIssue.project" :options="projects"
-                              stack-label options-dense></q-select>
+                              stack-label options-dense hide-dropdown-icon>
+                              <template v-slot:append>
+                                <q-icon name="fa-solid fa-angle-down" size="12px" />
+                              </template></q-select>
                           </q-item-section>
                         </q-item>
                         <q-item>
                           <q-item-section>
                             <q-item-label class="q-pb-xs">Issue Type *</q-item-label>
                             <q-select dense label="Issue Type" outlined v-model="currentIssue.issue" :options="issues"
-                              stack-label options-dense></q-select>
+                              stack-label options-dense hide-dropdown-icon>
+                              <template v-slot:append>
+                                <q-icon name="fa-solid fa-angle-down" size="12px" />
+                              </template></q-select>
                           </q-item-section>
                         </q-item>
                         <q-item>
@@ -193,21 +216,30 @@
                           <q-item-section>
                             <q-item-label class="q-pb-xs">Reporter</q-item-label>
                             <q-select dense outlined v-model="currentIssue.reporter" label="Reporter" :options="users"
-                              stack-label options-dense />
+                              stack-label options-dense hide-dropdown-icon>
+                              <template v-slot:append>
+                                <q-icon name="fa-solid fa-angle-down" size="12px" />
+                              </template></q-select>
                           </q-item-section>
                         </q-item>
                         <q-item>
                           <q-item-section>
                             <q-item-label class="q-pb-xs">Assignee</q-item-label>
                             <q-select dense outlined v-model="currentIssue.assignee" label="Assignee" :options="users"
-                              stack-label options-dense />
+                              stack-label options-dense hide-dropdown-icon>
+                              <template v-slot:append>
+                                <q-icon name="fa-solid fa-angle-down" size="12px" />
+                              </template></q-select>
                           </q-item-section>
                         </q-item>
                         <q-item>
                           <q-item-section>
                             <q-item-label class="q-pb-xs">Status</q-item-label>
                             <q-select dense outlined v-model="currentIssue.status" label="Status" :options="statuses"
-                              stack-label options-dense />
+                              stack-label options-dense hide-dropdown-icon>
+                              <template v-slot:append>
+                                <q-icon name="fa-solid fa-angle-down" size="12px" />
+                              </template></q-select>
                           </q-item-section>
                         </q-item>
                       </q-list>

@@ -11,11 +11,11 @@ const routes = [
     name: "About",
     component: () => import("../views/About.vue"),
   },
-  // {
-  //   path: "/dashboard",
-  //   name: "About",
-  //   component: () => import("../views/About.vue"),
-  // },
+  {
+    path: "/issue",
+    name: "Issue",
+    component: () => import("../views/Issue.vue"),
+  },
 ];
 
 const router = createRouter({
