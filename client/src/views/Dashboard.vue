@@ -274,7 +274,7 @@ import { ref } from 'vue'
 
 export default {
 
-  name: 'MyLayout',
+  name: 'Dashboard',
   components: {
     AppToolbar
   },
