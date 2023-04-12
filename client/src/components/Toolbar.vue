@@ -1,6 +1,6 @@
 <template>
   <q-toolbar class="q-px-none">
-    <q-img src="../assets/fragility.svg" style="width: 20px;" />
+    <q-img :src="imageSrc" style="width: 20px;" />
     <div v-if="$q.screen.gt.sm"
       class="toolbar-white-plain q-mr-xl q-gutter-md text-body2 text-weight-light row items-center no-wrap">
       <q-item-label class="text-h6 text-weight-light q-ml-lg">Fragility</q-item-label>
@@ -58,7 +58,9 @@ import { ref } from 'vue'
 export default {
   name: 'Toolbar',
   setup () {
-    return {};
+    return {
+      imageSrc: '/assets/fragility.svg'
+    };
   },
   methods: {},
   async mounted(){},

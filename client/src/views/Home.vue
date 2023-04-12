@@ -257,7 +257,7 @@ export default {
   flex: 1;
 }
 .background-image {
-  background-image: url('src/assets/main.jpg');
+  background-image: url('/assets/main.jpg');
   background-size: cover;
 }
 </style>
